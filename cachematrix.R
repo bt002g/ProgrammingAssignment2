@@ -5,8 +5,9 @@
 
 
 ## Defines an enhanced matrix class that can cache its own inverse
-## Optionally initializes with a standard *square* R-matrix
-## Generally use set/get functions for interacting with the internal R-matrix
+## (Under the hood it is just a list of method functions)
+## Optionally initialize with a standard *square* R-matrix
+## Generally use set/get functions (e.g., cmat$get()) for interacting with the internal R-matrix
 ## For inverse, compute externally and use setInv, fetch with getInv
 
 makeCacheMatrix <- function(x = matrix()) {
