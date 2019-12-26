@@ -1,15 +1,36 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Coursera R Programming
+## Programming Assignment 2 (Week 3)
+##
+## Task: Define matrices with cachable inverses
 
-## Write a short comment describing this function
+
+## Defines an enhanced matrix class that can cache its own inverse
+## Optionally initializes with a standard *square* R-matrix
+## Generally use set/get functions for interacting with the internal R-matrix
+## For inverse, compute externally and use setInv, fetch with getInv
 
 makeCacheMatrix <- function(x = matrix()) {
-
+    inv <- NULL
+    set <- function(y) {
+        x <<- y
+        inv <<- NULL
+    }
+    get <- function() x
+    setInv <- function(newInv) inv <<- newInv
+    getInv <- function() inv
+    list(set = set, get = get, setInv = setInv, getInv = getInv)
 }
 
 
-## Write a short comment describing this function
+## Utility for computing and caching a cacheMatrix's inverse, which first checks whether
+##   the inverse has already been computed and cached
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+    inv <- x$getInv()
+    if(!is.null(inv)) {
+        message("getting cached data")
+        return(inv)
+    }
+    x$setInv(solve(x$get()))
+    x$getInv()
 }
